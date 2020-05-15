@@ -1,0 +1,19 @@
+{
+  "name": "draw5",
+  "version": "1.0.0",
+  "description": "Draw5 codebase",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PrakharUniyal/Draw5.git"
+  },
+  "author": "Khyati Agarwal, Prakhar Uniyal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PrakharUniyal/Draw5/issues"
+  },
+  "homepage": "https://github.com/PrakharUniyal/Draw5#readme"
+}
