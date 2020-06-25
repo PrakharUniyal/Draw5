@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>File Upload</title>
+    </head>
+    <body>
+        <h1>Welcome User</h1>
+        <!-- <form action="/userLogin" method="post" enctype="multipart/form-data">
+            <input type="text" name="email">
+            <input type="password" name="pass">
+            <input type="submit" value="Login">
+        </form> -->
+        <form action="/userSignup" method="post" enctype="multipart/form-data">
+            Email:<br><input type="text" name="email"><br>
+            Password:<br><input type="password" name="pass"><br>
+            Avatar:<br><input type="file" name="avatar"><br><br>
+            <input type="submit" value="Sign Up">
+        </form>
+    </body>
+</html>
