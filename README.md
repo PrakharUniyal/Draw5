@@ -9,7 +9,7 @@ git clone git@github.com:PrakharUniyal/Draw5.git
 ```
 npm install
 ```
-After this, use app.js to run the service on [localhost:3000](https://localhost:3000).
+After this, use app.js to run the service on [localhost:3000](https://localhost:3000) and sudo mongod on another terminal to create and connect with a local mongo database.
 ```
 nodemon app
 ```
