@@ -1,2 +1,15 @@
-# Draw5
-Draw5 codebase
+# pmcBucket
+
+## Setup for service package
+1. Clone the repository
+```
+git clone git@github.com:PrakharUniyal/Draw5.git
+```
+2. Install node modules
+```
+npm install
+```
+After this, use app.js to run the service on [localhost:3000](https://localhost:3000).
+```
+nodemon app
+```
