@@ -5,17 +5,20 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
 
-var multer  = require('multer');
-var storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, 'users/');
-  },
-  filename: function(req, file, cb) {
-    var id = req.body.email.split('@')[0];
-    cb(null, id + '.jpg');
-  }
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost:27017/draw5', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 });
-var upload = multer({ storage: storage });
+var db = mongoose.connection;
+
+db.on('error', console.log.bind(console, "connection error"));
+db.once('open', function (callback) {
+  console.log("connection succeeded!");
+});
+
+
 
 app.get('/',function(req,res) {
     res.sendFile('index.html',{root:'./views'});
@@ -29,10 +32,7 @@ app.get('/memberHome',function(req,res) {
     res.sendFile('index.html',{root:'./views/member'});
 });
 
-app.post('/userSignup', upload.single('avatar'), function (req, res, next) {
-    res.send('Registered!')
-    // req.file is the `avatar` file
-    // req.body will hold the text fields, if there were any
-})
+require('./routes/users/signup')(app,db);
+require('./routes/members/signup')(app,db);
 
 app.listen(3000);
