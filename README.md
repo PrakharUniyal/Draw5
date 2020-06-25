@@ -13,3 +13,6 @@ After this, use app.js to run the service on [localhost:3000](https://localhost:
 ```
 nodemon app
 ```
+```
+sudo mongod
+```
