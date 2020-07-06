@@ -16,10 +16,11 @@
         <br>
 
         <h3> Search Someone !</h3>
-        <p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>
-        <button><label for="file" style="cursor: pointer;">Upload Image</label></button>
-        <p><img id="output" width="200" /></p>
-        <button>Search</button>
+        <form action="/search" method="get">
+            <label for="img">Select image:</label>
+            <input type="file" id="img" name="img" accept="image/*"><br>
+            <input type="submit">
+        </form>
     </body>
 </html>
 

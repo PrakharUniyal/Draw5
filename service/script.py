@@ -1,2 +1,2 @@
-print("HELLO FROM PYTHON")
+print("IMAGES FOUND")
 
