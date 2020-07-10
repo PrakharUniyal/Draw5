@@ -6,7 +6,8 @@ const {spawn} = require('child_process');
 var app = express();
 
 app.use(bodyParser.json());
-app.use(express.static('public'));
+app.use(express.static(__dirname+'public'));
+app.use('/data', express.static('data'))
 app.use(bodyParser.urlencoded({extended: true}));
 
 //Database
@@ -35,8 +36,9 @@ var storage =   multer.diskStorage({
 var upload = multer({ storage : storage}).single('userPhoto');
 
 
-app.post('/api/photo',function(req,res){
+app.post('/api/photo',function(req,res,next){
 
+	//First uploading photo of user
     upload(req,res,function(err) 
     {
         if(err) 
@@ -46,24 +48,24 @@ app.post('/api/photo',function(req,res){
         // res.end("File is uploaded");
     });
  
+    //Python script to filter data images
 	var dataToSend;
-
 	// spawn new child process to call the python script
-	const python = spawn('python', ['script.py']);
-
+	const python = spawn('python3', ['script.py']);
 	// collect data from script
 	python.stdout.on('data', function (data) {
 	console.log('Pipe data from python script ...');
 	dataToSend = data.toString();
 	});
-
 	// in close event we are sure that stream from child process is closed
 	python.on('close', (code) => {
 	console.log(`child process close all stdio with code ${code}`);
-
 	// send data to browser
-	res.send(dataToSend)
+	// res.send(dataToSend)
 	});
+
+	//show found images
+	res.sendFile('search.html',{root:'./views'});
  
 });
 
