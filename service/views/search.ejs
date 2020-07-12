@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>pmcBucket</title>
+</head>
+<body>
+	<h1>Images Found</h1><br>
+	
+	<div>
+		<p><%= images.length %></p>
+		<% for(var i=0; i<images.length; i++) {%>
+		<p><%= images[i].local.name %></p>
+		<% } %>
+    </div>
+</body>
+</html>
+

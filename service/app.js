@@ -2,8 +2,11 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var multer  =   require('multer');
 const {spawn} = require('child_process');
+const path = require('path');
+const fs = require('fs');
 
 var app = express();
+app.set('view engine', 'ejs');
 
 app.use(bodyParser.json());
 app.use(express.static(__dirname+'public'));
@@ -36,6 +39,9 @@ var storage =   multer.diskStorage({
 var upload = multer({ storage : storage}).single('userPhoto');
 
 
+//joining path of directory 
+const directoryPath = path.join(__dirname, 'data/filter_images');
+
 app.post('/api/photo',function(req,res,next){
 
 	//First uploading photo of user
@@ -57,16 +63,35 @@ app.post('/api/photo',function(req,res,next){
 	console.log('Pipe data from python script ...');
 	dataToSend = data.toString();
 	});
-	// in close event we are sure that stream from child process is closed
-	python.on('close', (code) => {
-	console.log(`child process close all stdio with code ${code}`);
-	// send data to browser
-	// res.send(dataToSend)
+	
+  // in close event we are sure that stream from child process is closed
+	python.on('close', (code) => 
+  {
+    console.log(`child process close all stdio with code ${code}`);
+
+    //getting filtered images
+    var img = [];
+    fs.readdir(directoryPath, function (err, files) 
+    {
+      //handling error
+      if (err) {
+          return console.log('Unable to scan directory: ' + err);
+      } 
+      //listing all files using forEach
+      files.forEach(function (file) {
+          // Do whatever you want to do with the file
+          // console.log(file); 
+          img.push(file);
+      });
+      console.log(img, "1");
+    });
+
+    console.log(img, "2"); 
+    //show found images
+    res.render('search.ejs',{root:'./views', images:img});
+  	
 	});
 
-	//show found images
-	res.sendFile('search.html',{root:'./views'});
- 
 });
 
 
