@@ -9,7 +9,8 @@
 	<div>
 		<p><%= images.length %></p>
 		<% for(var i=0; i<images.length; i++) {%>
-		<p><%= images[i].local.name %></p>
+		<p><%= images[i] %></p>
+		<img src="/data/filter_images/<%= images[i] %>" height=200 width=200>
 		<% } %>
     </div>
 </body>

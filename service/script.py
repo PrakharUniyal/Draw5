@@ -81,3 +81,5 @@ for filename_1 in os.listdir(images):
             
     for filename_3 in os.listdir(cropped_faces):
         os.remove(os.path.join(cropped_faces, filename_3))
+
+print("End")

@@ -62,33 +62,33 @@ app.post('/api/photo',function(req,res,next){
 	python.stdout.on('data', function (data) {
 	console.log('Pipe data from python script ...');
 	dataToSend = data.toString();
+
+  console.log(dataToSend);
 	});
 	
   // in close event we are sure that stream from child process is closed
 	python.on('close', (code) => 
-  {
-    console.log(`child process close all stdio with code ${code}`);
+  	{
+	    console.log(`child process close all stdio with code ${code}`);
 
-    //getting filtered images
-    var img = [];
-    fs.readdir(directoryPath, function (err, files) 
-    {
-      //handling error
-      if (err) {
-          return console.log('Unable to scan directory: ' + err);
-      } 
-      //listing all files using forEach
-      files.forEach(function (file) {
-          // Do whatever you want to do with the file
-          // console.log(file); 
-          img.push(file);
-      });
-      console.log(img, "1");
-    });
+	    //getting filtered images
+	    var img = [];
+	    fs.readdir(directoryPath, function (err, files) 
+	    {
+	      //handling error
+	      if (err) {
+	          return console.log('Unable to scan directory: ' + err);
+	      } 
+	      //listing all files using forEach
+	      files.forEach(function (file) {
+	          // Do whatever you want to do with the file
+	          // console.log(file); 
+	          img.push(file);
+	      });
+	      console.log(img, "1");
 
-    console.log(img, "2"); 
-    //show found images
-    res.render('search.ejs',{root:'./views', images:img});
+	      res.render('search.ejs',{root:'./views', images:img});
+	    });    
   	
 	});
 
