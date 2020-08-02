@@ -30,3 +30,10 @@ Allow members to upload single photo(for now), scan it for faces and match them 
 
 User Login/Home Page:
 Find the list of photos of the user from 'face' database and use it to display those photos from 'photos' file storage folder.
+
+## Service folder refactoring details:
+1. Made structure of routes imported in app.js modular.
+1. Refactored some of the routes and their imported modules.
+1. Created a dedicated 'storage' folder for carrying out all the work involving media files.
+1. Created a dedicated 'scripts' folder for the python scripts being called.
+1. Some other minor changes in code at various places which won't affect the functionality.

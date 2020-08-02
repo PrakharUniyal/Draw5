@@ -1,16 +1,19 @@
-var multer  = require('multer');
-var storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, 'users/');
-  },
-  filename: function(req, file, cb) {
-    var id = req.body.email.split('@')[0];
-    cb(null, id + '.jpg');
-  }
-});
-var upload = multer({ storage: storage });
+module.exports = function(app,db,multer) {
+    
+    // Photo storage configurations for multer
+    var upload = multer({
+        storage: multer.diskStorage({
+            destination: function (req, file, cb) {
+                cb(null, 'storage/users/');
+            },
+            filename: function (req, file, cb) {
+                var id = req.body.email.split('@')[0];
+                cb(null, id + '.jpg');
+            }
+        })
+    });
 
-module.exports = function(app,db) {
+    // User signup
     app.post('/userSignup', upload.single('avatar'), function (req, res, next) {
         var email = req.body.email;
         var pass = req.body.pass;
@@ -21,10 +24,10 @@ module.exports = function(app,db) {
 
         db.collection('users').insertOne(data, function (err, collection) {
             if (err) throw err;
-            console.log("Record inserted:"+email+" | "+pass);
+            console.log("Record inserted:"+email+" : "+pass);
         });
+
         res.send('User registered!');
-        // req.file is the `avatar` file
-        // req.body will hold the text fields, if there were any
     });
+
 }
