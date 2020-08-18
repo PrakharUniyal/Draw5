@@ -26,7 +26,7 @@ Member signup:
 Store member info in 'member' database.
 
 Member Login/Upload:
-Allow members to upload single photo(for now), scan it for faces and match them with the ones in 'users' folder for identification and then store the matched ids in the 'face' database and photos in 'photos' file storage folder.
+Allow members to upload single photo(for now), scan it for faces and match them with the ones in 'user' folder for identification and then store the matched ids in the 'face' database and photos in 'photos' file storage folder.
 
 User Login/Home Page:
 Find the list of photos of the user from 'face' database and use it to display those photos from 'photos' file storage folder.
@@ -37,3 +37,8 @@ Find the list of photos of the user from 'face' database and use it to display t
 1. Created a dedicated 'storage' folder for carrying out all the work involving media files.
 1. Created a dedicated 'scripts' folder for the python scripts being called.
 1. Some other minor changes in code at various places which won't affect the functionality.
+
+### Schemas for DB collections
+user: uId,uMail,uPass,face
+member: mId,mMail,mPass
+face: pId,mId,{faces}

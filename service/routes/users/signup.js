@@ -20,9 +20,10 @@ module.exports = function(app,db,multer) {
         var data = {
             "email": email,
             "password": pass,
+            "face": req.body.email.split('@')[0]
         }
 
-        db.collection('users').insertOne(data, function (err, collection) {
+        db.collection('user').insertOne(data, function (err, collection) {
             if (err) throw err;
             console.log("Record inserted:"+email+" : "+pass);
         });

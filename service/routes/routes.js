@@ -23,6 +23,9 @@ module.exports = function (app,db,multer) {
 
     // Signup/Login POST routes
     require('./users/signup')(app, db, multer);
-    require('./members/signup')(app, db, multer);
+    require('./members/signup')(app, db);
+
+    // Photo upload route for member
+    require('./members/upload')(app,db,multer);
 
 }
